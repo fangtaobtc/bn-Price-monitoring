@@ -1,0 +1,6 @@
+# Binance价格监控配置文件
+symbol: BTCUSDT          # 币种符号
+alert_price: 130000.0     # 高价报警阈值（设0禁用）
+low_alert_price: 101000.0 # 低价报警阈值（设0禁用）
+interval: 1              # 监控间隔（秒）
+music_file: music.mp3    # 音乐文件路径
