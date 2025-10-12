@@ -4,7 +4,7 @@ import pygame
 import signal
 import sys
 import os
-import yaml  # 新增：YAML支持
+import yaml
 
 # 全局变量：上次价格，用于计算变化率；警报状态
 last_price = None
