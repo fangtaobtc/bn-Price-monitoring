@@ -1,3 +1,3 @@
 @echo off
-python api-bnjyd.py
+python api-main.py
 cmd /k
