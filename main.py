@@ -36,11 +36,11 @@ def print_colored(text, color='red'):
 def print_aligned(timestamp, exchange, formatted_symbol, current_price, change_pct, is_alert=False, is_invalid=False, is_error=False):
     """打印对齐的价格信息"""
     # 定义列宽度（显示宽度）
-    ts_width = 20  # 时间戳显示宽（实际字符19 +1空格）
-    ex_display_width = 16  # 交易所列显示宽
+    ts_width = 19  # 时间戳显示宽（实际字符19 +1空格）
+    ex_display_width = 8  # 交易所列显示宽
     sym_width = 10  # 符号显示宽（英文为主）
-    price_width = 16  # 价格列显示宽
-    change_width = 10  # 变化列显示宽
+    price_width = 8  # 价格列显示宽
+    change_width = 4  # 变化列显示宽
     
     ex_base = exchange.upper()
     base_width = display_width(ex_base)
@@ -59,7 +59,7 @@ def print_aligned(timestamp, exchange, formatted_symbol, current_price, change_p
     elif is_error:
         error_msg = f"错误: {current_price}"  # current_price 这里是 error msg
         # 对于错误，简化对齐，使用固定宽
-        line = f"[{timestamp:<{ts_width}}] [{ex_display}] {formatted_symbol:<{sym_width}} | {error_msg:<{price_width + change_width + 10}}"
+        line = f"[{timestamp:<{ts_width}}] [{ex_display}] {formatted_symbol:<{sym_width}} | {error_msg:<{price_width + change_width + 8}}"
         print(line)
     else:
         line = f"[{timestamp:<{ts_width}}] [{ex_display}] {formatted_symbol:<{sym_width}} | 价格: {price_str:<{price_width}} USDT | 变化: {change_str:<{change_width}}"
@@ -127,7 +127,7 @@ def get_price(exchange, symbol):
             else:
                 return None, f"请求失败，状态码: {response.status_code}"
         
-        elif exchange == '库币kucoin':
+        elif exchange == '库币':
             formatted_sym = symbol[:-4] + '-' + symbol[-4:]
             url = f"https://api.kucoin.com/api/v1/market/stats?symbol={formatted_sym}"
             response = requests.get(url, headers=headers, timeout=5)
@@ -141,7 +141,7 @@ def get_price(exchange, symbol):
             else:
                 return None, f"请求失败，状态码: {response.status_code}"
         
-        elif exchange == '抹茶mexc':
+        elif exchange == '抹茶':
             url = f"https://api.mexc.com/api/v3/ticker/price?symbol={symbol}"
             response = requests.get(url, headers=headers, timeout=5)
             if response.status_code == 200:
@@ -151,7 +151,7 @@ def get_price(exchange, symbol):
             else:
                 return None, f"请求失败，状态码: {response.status_code}"
         
-        elif exchange == '火币huobi':
+        elif exchange == '火币':
             formatted_sym = symbol.lower()
             url = f"https://api.huobi.pro/market/detail/merged?symbol={formatted_sym}"
             response = requests.get(url, headers=headers, timeout=5)
@@ -233,7 +233,7 @@ def load_config():
 
 def select_mode_and_exchanges():
     """选择模式并选择交易所"""
-    exchanges_list = ['币安', 'okx', '芝麻开门', 'bitget', '库币kucoin', '抹茶mexc', '火币huobi', 'bybit']
+    exchanges_list = ['币安', 'okx', '芝麻开门', 'bitget', '库币', '抹茶', '火币', 'bybit']
     print("\n请选择模式:")
     print("1. 交易所价格警报模式")
     print("2. 多个交易所比价模式")
