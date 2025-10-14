@@ -1,3 +1,3 @@
 @echo off
-python api-main.py
+python main.py
 cmd /k
