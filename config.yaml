@@ -1,6 +1,14 @@
-# Binance价格监控配置文件
-symbol: BTCUSDT          # 币种符号
-alert_price: 130000.0     # 高价报警阈值（设0禁用）
-low_alert_price: 101000.0 # 低价报警阈值（设0禁用）
-interval: 1              # 监控间隔（秒）
-music_file: music.mp3    # 音乐文件路径
+#config.yaml
+symbols:  # 币种列表，每个有独立阈值
+  - symbol: BTCUSDT          # 币种符号
+    alert_price: 130000.0     # 高价报警阈值（设0禁用）
+    low_alert_price: 101000.0 # 低价报警阈值（设0禁用）
+  - symbol: ETHUSDT
+    alert_price: 4000.0
+    low_alert_price: 3000.0
+  - symbol: SOLUSDT
+    alert_price: 300.0
+    low_alert_price: 100.0
+interval: 3              # 监控间隔（秒）
+music_file: music.mp3    # 音乐文件路径（建议使用短警报音以避免重叠噪音）
+price_gap_threshold: 1.0 # 价格差距阈值（百分比，仅多个交易所模式，设0禁用）
